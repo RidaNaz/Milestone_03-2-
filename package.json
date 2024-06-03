@@ -4,6 +4,8 @@
   "description": "This is my Milestone_03 project_02 of quarter_01 at GIAIC.",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "milestone_03-2-rida": "dist/index.js" },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

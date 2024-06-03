@@ -1,12 +1,11 @@
+import chalk from "chalk";
 export function displayResults(result) {
-    console.log(`\nTyping Speed: ${result.wpm.toFixed(2)} WPM`);
-    console.log(`Errors: ${result.errors}`);
-    console.log(`Typed Text: ${result.typedText}`);
-    const totalWords = result.typedText.split(' ').filter(word => word.length > 0).length;
-    const correctWords = Math.max(0, totalWords - result.errors);
-    const wordAccuracy = totalWords > 0 ? (correctWords / totalWords) * 100 : 0;
-    // console.log(`Accuracy (Word-based): ${wordAccuracy.toFixed(2)}%`);
-    console.log(`Accuracy (Keystroke-based): ${result.accuracy.toFixed(2)}%`);
-    console.log(`Correct Keystrokes: ${result.correctKeystrokes}`);
-    console.log(`Total Keystrokes: ${result.totalKeystrokes}`);
+    console.log(chalk.blueBright.bold('\n=========================================================='));
+    console.log(chalk.gray.bold(`Typed Text : ${result.typedText}`));
+    console.log(chalk.greenBright.bold(`\n\tTyping Speed :\t\t\t${result.wpm.toFixed(2)} WPM`));
+    console.log(chalk.greenBright.bold(`\tErrors :\t\t\t${result.errors}`));
+    console.log(chalk.greenBright.bold(`\tAccuracy (Keystroke-based):\t${result.accuracy.toFixed(2)}%`));
+    console.log(chalk.greenBright.bold(`\tCorrect Keystrokes :\t\t${result.correctKeystrokes}`));
+    console.log(chalk.greenBright.bold(`\tTotal Keystrokes :\t\t${result.totalKeystrokes}\n`));
+    console.log(chalk.blueBright.bold('==========================================================\n'));
 }

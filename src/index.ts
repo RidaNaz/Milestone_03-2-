@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import inquirer from 'inquirer';
 import { UserService } from './service/user.js';
 import { TypingTest } from './service/test.js';
@@ -7,7 +9,6 @@ import chalk from 'chalk';
 export class CLIApp {
     private userService: UserService;
     private userName: string = '';
-    private warmUpCompleted: boolean = false;
 
     constructor() {
         this.userService = new UserService();
@@ -15,7 +16,7 @@ export class CLIApp {
 
     public async run() {
         console.clear();
-        console.log(chalk.blueBright.bold('\n=========================================================='));
+        console.log(chalk.blueBright.bold('=========================================================='));
         console.log(chalk.greenBright.bold("\tWelcome to the Online Typing Speed Tester!"));
         console.log(chalk.blueBright.bold('==========================================================\n'));
         console.log("This application will help you measure and improve your typing speed and accuracy.\n");
@@ -28,7 +29,7 @@ export class CLIApp {
             } else if (action === 'Login') {
                 await this.handleLogin();
             } else if (action === 'Exit') {
-                console.log(chalk.bgCyanBright.bold("\nThank you for using the Online Typing Speed Tester!"));
+                console.log(chalk.bgCyanBright.bold("\nThank you for using the Online Typing Speed Tester!\n"));
                 console.log(chalk.bgMagentaBright.bold("Keep practicing and improving your typing skills. Goodbye!"));
                 break;
             }
@@ -68,7 +69,7 @@ export class CLIApp {
     }
 
     private async warmUpExercise() {
-        console.log(chalk.cyanBright.bold("\nMake sure to place your fingers on the correct keys.\n"));
+        console.log(chalk.cyanBright.bold("Make sure to place your fingers on the correct keys.\n"));
         console.log(chalk.magentaBright.bold("Warm-up Exercise: Type the following sequence as fast as you can."));
         console.log(chalk.gray.bold("\tasdf jkl;\n"));
         let typedText: string;
@@ -118,7 +119,6 @@ export class CLIApp {
 
         const test = new TypingTest(passage, durationInMinutes);
         const result = await test.start();
-        console.log("Typing test completed. Displaying results..."); // Debug log
         displayResults(result);
 
         const { action } = await inquirer.prompt({
@@ -137,12 +137,35 @@ export class CLIApp {
 
     private getTestPassage(difficulty: string): string {
         if (difficulty === 'Basic Sentences') {
-            return "The quick brown fox jumps over the lazy dog.";
+            const basicSentences = [
+                "The quick brown fox jumps over the lazy dog.\n",
+                "She sells seashells by the seashore.\n",
+                "He who hesitates is lost.\n",
+                "A stitch in time saves nine.\n"
+            ];
+            return this.getRandomItemFromArray(basicSentences);
         } else if (difficulty === 'Random Words') {
-            return "apple banana orange grape cherry pear peach";
+            const randomWords = [
+                "apple banana orange grape cherry pear peach\n",
+                "cat dog elephant lion tiger giraffe zebra\n",
+                "table chair desk lamp sofa bed cupboard\n",
+                "sun moon stars sky clouds rain snow\n"
+            ];
+            return this.getRandomItemFromArray(randomWords);
         } else {
-            return "In computer programming, the term 'syntax' refers to the rules that define the structure of a programming language.";
+            const technicalTexts = [
+                "In computer programming, the term 'syntax' refers to the rules that define the structure of a programming language.\n",
+                "A variable is a storage location and an associated symbolic name (an identifier) which contains some known or unknown quantity or information, a value.\n",
+                "An array is a data structure consisting of a collection of elements, each identified by at least one array index or key.\n",
+                "Recursion is a method of solving problems where the solution depends on solutions to smaller instances of the same problem.\n"
+            ];
+            return this.getRandomItemFromArray(technicalTexts);
         }
+    }
+    
+    private getRandomItemFromArray(array: string[]): string {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
     }
 }
 
