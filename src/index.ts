@@ -19,7 +19,7 @@ export class CLIApp {
         console.log(chalk.blueBright.bold('=========================================================='));
         console.log(chalk.greenBright.bold("\tWelcome to the Online Typing Speed Tester!"));
         console.log(chalk.blueBright.bold('==========================================================\n'));
-        console.log("This application will help you measure and improve your typing speed and accuracy.\n");
+        console.log(chalk.gray.bold("This application will help you measure and improve your typing speed and accuracy.\n"));
 
         while (true) {
             const action = await this.getMainMenuAction();
