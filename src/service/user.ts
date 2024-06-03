@@ -1,10 +1,8 @@
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import * as uuid from 'uuid';
 import validator from 'validator';
 
 interface User {
-  id: string;
   name: string;
   email: string;
   password: string;
@@ -55,7 +53,6 @@ export class UserService {
     }
 
     const user: User = {
-      id: uuid.v4(),
       name: name,
       email: email,
       password: password,
