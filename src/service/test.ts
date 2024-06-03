@@ -34,7 +34,6 @@ export class TypingTest {
                 });
                 typedText = response.typedText;
 
-                typedText = response.typedText;
                 if (typedText.trim().length === 0) {
                     console.log("\nPlease type something.");
                 } else {

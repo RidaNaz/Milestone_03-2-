@@ -17,7 +17,7 @@ export class CLIApp {
         console.log(chalk.blueBright.bold('==========================================================\n'));
         console.log(chalk.gray.bold("This application will help you measure and improve your typing speed and accuracy.\n"));
         while (true) {
-            const action = await this.getMainMenuAction();
+            const action = await this.getMainMenu();
             if (action === 'Signup') {
                 await this.handleSignup();
             }
@@ -25,12 +25,12 @@ export class CLIApp {
                 await this.handleLogin();
             }
             else if (action === 'Exit') {
-                console.log(chalk.bgCyanBright.bold("\nThank you for using the Online Typing Speed Tester!\n"));
-                console.log(chalk.bgMagentaBright.bold("Keep practicing and improving your typing skills. Goodbye!"));
+                console.log(chalk.cyanBright.bold("\nThank you for using the Online Typing Speed Tester!\n"));
+                console.log(chalk.magentaBright.bold("Keep practicing and improving your typing skills. Goodbye!"));
                 break;
             }
             if (this.userName !== '') {
-                const startTestAction = await this.getStartTestAction();
+                const startTestAction = await this.getStartTest();
                 if (startTestAction === 'Start Test') {
                     await this.handleStartTest();
                 }
@@ -40,7 +40,7 @@ export class CLIApp {
             }
         }
     }
-    async getMainMenuAction() {
+    async getMainMenu() {
         const { chosenAction } = await inquirer.prompt({
             type: 'list',
             name: 'chosenAction',
@@ -81,7 +81,7 @@ export class CLIApp {
         }
         console.log(chalk.greenBright.bold("\nWarm-up exercise completed!\n"));
     }
-    async getStartTestAction() {
+    async getStartTest() {
         const { chosenAction } = await inquirer.prompt({
             type: 'list',
             name: 'chosenAction',
@@ -129,7 +129,7 @@ export class CLIApp {
                 "He who hesitates is lost.\n",
                 "A stitch in time saves nine.\n"
             ];
-            return this.getRandomItemFromArray(basicSentences);
+            return this.getRandomPassage(basicSentences);
         }
         else if (difficulty === 'Random Words') {
             const randomWords = [
@@ -138,7 +138,7 @@ export class CLIApp {
                 "table chair desk lamp sofa bed cupboard\n",
                 "sun moon stars sky clouds rain snow\n"
             ];
-            return this.getRandomItemFromArray(randomWords);
+            return this.getRandomPassage(randomWords);
         }
         else {
             const technicalTexts = [
@@ -147,10 +147,10 @@ export class CLIApp {
                 "An array is a data structure consisting of a collection of elements, each identified by at least one array index or key.\n",
                 "Recursion is a method of solving problems where the solution depends on solutions to smaller instances of the same problem.\n"
             ];
-            return this.getRandomItemFromArray(technicalTexts);
+            return this.getRandomPassage(technicalTexts);
         }
     }
-    getRandomItemFromArray(array) {
+    getRandomPassage(array) {
         const randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
     }

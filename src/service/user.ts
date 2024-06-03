@@ -59,7 +59,6 @@ export class UserService {
     };
 
     this.users.push(user);
-    this.currentUser = user;
     console.log(chalk.greenBright.bold('\nUser registered successfully!\n'));
     return user;
   }
@@ -79,9 +78,5 @@ export class UserService {
       console.log(chalk.redBright.bold('\nInvalid credentials!\n'));
       return null;
     }
-  }
-
-  getCurrentUser(): User | null {
-    return this.currentUser;
   }
 }
